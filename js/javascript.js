@@ -59,6 +59,7 @@ function renderTable(data) {
 }
 
 function checkExpiredDates() {
+
   if (!tableData || tableData.length < 2) {
     console.error("A tabela está vazia ou não possui dados suficientes.");
     return;
@@ -95,13 +96,13 @@ function checkExpiredDates() {
             const daysDifference = proximaDate.diff(moment().tz("America/Sao_Paulo"), 'days');
 
             if (daysDifference < 0 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Ja Vencido ; ${sapValue} ; ${rowIndex + 2}; ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `Vencido, SAP:  ${sapValue} Linha: ${rowIndex + 2} Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vencido');
             } else if (daysDifference === 0 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Vence Hoje ; ${sapValue} ; ${rowIndex + 2} ;  ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `Vence Hoje, SAP:	 ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-hoje');
             } else if (daysDifference <= 15 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Vence dentro de 15 dias ; ${sapValue};  ${rowIndex + 2} ; ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `Vence dentro de 15 dias, SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-15-dias');
             }
           } catch (error) {
