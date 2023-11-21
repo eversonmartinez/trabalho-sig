@@ -102,7 +102,7 @@ function checkExpiredDates() {
               expiredItemsTextArea.value += `VENCE HOJE - SAP:	 ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-hoje');
             } else if (daysDifference <= 15 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `VENDE DENTRO DE 15 DIAS - SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `VENCE DENTRO DE 15 DIAS - SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-15-dias');
             }
           } catch (error) {
@@ -318,7 +318,6 @@ function buscaModal(){
   var local = document.getElementById("inputLocalizacao").value;
 
   if(sap){
-    console.log("entrou")
     const tableBodyRows = document.querySelectorAll('#dataTable tbody tr');
     const editedData = [];
 
@@ -327,17 +326,19 @@ function buscaModal(){
       row.querySelectorAll('td').forEach((cell, index) => {
         const columnName = document.querySelector(`#dataTable thead th:nth-child(${index + 1})`).textContent;
         rowData[columnName] = cell.textContent;
+        //console.log(columnName);
       });
       
-      if(rowData[0].contains(sap))
-      editedData.push(rowData);
+      if(rowData['SAP'].includes(sap))
+      console.log("ENTROU");
+      // editedData.push(rowData);
     });
   }
  
   
 
   // modal.inputSap.value="";
-  console.log(sap);
-  console.log(editedData);
+  //console.log(sap);
+  //console.log(editedData);
 }
 
