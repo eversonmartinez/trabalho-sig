@@ -1,4 +1,12 @@
-/* Poppins font-family */
+ .scrolling-container {
+            width: 100%; 
+            overflow-x: auto; 
+            white-space: nowrap; 
+        }
+
+         .scrolling-content {
+            width: 1200px; 
+        }
 @font-face {
   font-family: 'Poppins';
   font-style: normal;
