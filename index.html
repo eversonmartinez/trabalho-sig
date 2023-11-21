@@ -31,16 +31,18 @@
       <div class="logo">
         <a class="" >
           
-          <img src="media/logo.png" height="50" alt="MDB Logo">
+        <img src="media/logo.png" height="50" alt="MDB Logo">
 
-            </a>			  
-				<ul class="navbar-nav  d-flex align-items-center ">
-			      <li class="nav-item active mobile-view">
-			        <a class="nav-link d-flex align-items-center" href="#menu-toggle"  id="menu-toggle">
-			        	<i class="material-icons">menu</i>
-			        	<span class="sr-only">(current)</span></a>
-			      </li>
-			  	</ul>
+          </a>
+      </div>			  
+      <!-- Tava acrescentando um item de menu que não estava funcionando, resolvi retirar para -->
+      <!-- <ul class="navbar-nav  d-flex align-items-center ">
+        <li class="nav-item active mobile-view">
+          <a class="nav-link d-flex align-items-center" href="#menu-toggle"  id="menu-toggle">
+            <i class="material-icons">menu</i>
+            <span class="sr-only">(current)</span></a>
+        </li>
+      </ul> -->
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
@@ -56,8 +58,10 @@
 			      </li>
 			      <li class="nav-item">
               <a class="nav-link" href="#show" id="show">Exibir Expirados</a>
-          
-			  <li class="nav-item">
+			      <!-- <li class="nav-item">
+			        <a class="nav-link" href="#locale">Localizar ferramenta</a>
+			      </li> -->
+			      <li class="nav-item">
 			        <a class="nav-link" href="#import">Importar dados</a>
 			      </li>
 			    </ul>
@@ -282,12 +286,26 @@
         // Exibe o botão "Salvar Edição"
     });
 
+    document.querySelector('a[href="#locale"]').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Habilita a edição da tabela
+     //   hideExportButton();
+      showOutput();
+        showMesclar();
+        showExportButton();
+        hideMarcar();
+        
+
+        // Exibe o botão "Salvar Edição"
+    });
+
 
     // Adiciona um ouvinte de evento de clique ao link "Exibir Expirados"
     document.querySelector('a[href="#show"]').addEventListener('click', function (event) {
         event.preventDefault();
         showOutput();
-showMarcar();
+        showMarcar();
 
         checkExpiredDates();
       //  hideExportButton();

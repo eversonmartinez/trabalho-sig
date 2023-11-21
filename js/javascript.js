@@ -96,13 +96,13 @@ function checkExpiredDates() {
             const daysDifference = proximaDate.diff(moment().tz("America/Sao_Paulo"), 'days');
 
             if (daysDifference < 0 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Vencido, SAP:  ${sapValue} Linha: ${rowIndex + 2} Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `VENCIDO - SAP:  ${sapValue} Linha: ${rowIndex + 2} Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vencido');
             } else if (daysDifference === 0 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Vence Hoje, SAP:	 ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `VENCE HOJE - SAP:	 ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-hoje');
             } else if (daysDifference <= 15 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `Vence dentro de 15 dias, SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `VENDE DENTRO DE 15 DIAS - SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-15-dias');
             }
           } catch (error) {
