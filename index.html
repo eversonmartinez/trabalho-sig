@@ -10,15 +10,11 @@
 
     <title>SLB</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- material icons cdn -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-    <!-- common css -->
     <link rel="stylesheet" type="text/css" href="css/common.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -26,9 +22,9 @@
 </head>
 
 <body>
-  <!-- /#sidebar -->
 
-  <!-- Page Content -->
+ 
+
   <div id="main-content">
     <!-- navbar start -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -37,233 +33,332 @@
           
           <img src="media/logo.png" height="50" alt="MDB Logo">
 
-        </a>			  	<!-- sidebar collapse button ## mobile view -->
-      </div>
-      <ul class="navbar-nav  d-flex align-items-center ">
-        <li class="nav-item active mobile-view">
-          <a class="nav-link d-flex align-items-center" href="#menu-toggle"  id="menu-toggle">
-            <i class="material-icons">menu</i>
-            <span class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <!-- end sidebar collapse button ## mobile view -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav d-flex align-items-center">
-          <li class="nav-item active">
-            <a class="nav-link d-flex align-items-center" href="#menu-toggle"  id="menu-toggle">
-              Exibir Planilha
-              <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#edit">Editar Planilha</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#show" id="show">Exibir Expirados</a>
-        </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Localizar Peças</a>
-          </li>
+            </a>			  
+				<ul class="navbar-nav  d-flex align-items-center ">
+			      <li class="nav-item active mobile-view">
+			        <a class="nav-link d-flex align-items-center" href="#menu-toggle"  id="menu-toggle">
+			        	<i class="material-icons">menu</i>
+			        	<span class="sr-only">(current)</span></a>
+			      </li>
+			  	</ul>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav d-flex align-items-center">
+			      <li class="nav-item active">
+			        <a class="nav-link d-flex align-items-center" href="#menu"  id="menu-toggle">
+			        	Exibir Planilha
+			        	<span class="sr-only">(current)</span></a>
+			      </li>
+            <li class="nav-item">
+			        <a class="nav-link" href="#edit">Editar Planilha</a>
+			      </li>
+			      <li class="nav-item">
+              <a class="nav-link" href="#show" id="show">Exibir Expirados</a>
           
-      <li class="nav-item">
-            <a class="nav-link" href="#">Importar dados</a>
-          </li>
-        </ul>
+			  <li class="nav-item">
+			        <a class="nav-link" href="#import">Importar dados</a>
+			      </li>
+			    </ul>
+			  </div>
+			</nav>
+
+            <div class="container-fluid">
+              <br>
+               <center><h1>Visualize a Planilha</h1></center> 
+               <br>
+               <input type="file" id="inputFile" class="mt-3"> 
+               <center><textarea   id="expiredItemsTextArea" rows="5" cols="30" placeholder="Datas vencidas serão informadas aqui" readonly="true"></textarea></center>
+
+               <br>
+               <center>
+                <button id="exportButton" class="btn btn-info mt-3" onclick="exportToCSV()">Salvar</button>
+                <button  id="mesclar" style="display: block;" class="btn btn-success mt-3" onclick="mergeWithExistingData()">Importar nova planilha</button>
+                <button id="indisponivel" class="btn btn-danger mt-3" onclick="markAsUnavailable()">Marcar como Indisponível</button>
+                <button id="expirados" class="btn btn-warning mt-3" onclick="checkExpiredDates()">Checar Expirados</button>
+                <button id="marcar" class="btn btn-danger mt-3" onclick="markAsUnavailable()">Marcar como Indisponível</button>
+
+              </center>
+
+               <br>
+               <br>
+               <div class="scrolling-container">
+
+               <table class="table table-striped table-dark" id="dataTable" class="table table-bordered mt-3">
+                <thead>
+                <tr>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+        </div>
+
+        
+</div>
     </div>
-  </nav>
-  <textarea  hidden="true" id="expiredItemsTextArea" rows="5" cols="30" placeholder="Datas vencidas serão informadas aqui" readonly="true"></textarea>
 
-  <!-- navbar ends -->
-      <div class="container-fluid">
-        <br>
-          <center><h1>Visualize a Planilha</h1></center> 
-          <br>
-          <input type="file" id="inputFile" class="mt-3">
-          <br>
-          <br>
-          <br>
-          <table class="table table-striped table-dark" id="dataTable" class="table table-bordered mt-3">
-          <thead>
-          <tr>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-  </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/javascript.js"></script>
+    
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script src="https://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
+<script>
+
+</script>
+<script>
+  
+</script>
+<script>
+  function showExportButton() {
+    var exportButton = document.getElementById("exportButton");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function hideTable() {
+    var exportButton = document.getElementById("dataTable");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideExportButton() {
+    var exportButton = document.getElementById("exportButton");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideTabelaExpirados() {
+    var exportButton = document.getElementById("tabelaExpirados");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideOutput() {
+    var exportButton = document.getElementById("expiredItemsTextArea");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function showOutput() {
+    var exportButton = document.getElementById("expiredItemsTextArea");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function hideExpirados() {
+    var exportButton = document.getElementById("expirados");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideMesclar() {
+    var exportButton = document.getElementById("mesclar");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideMarcar() {
+    var exportButton = document.getElementById("marcar");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideIndisponivel() {
+    var exportButton = document.getElementById("indisponivel");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function hideExpirados() {
+    var exportButton = document.getElementById("expirados");
+    exportButton.style.display = "none";
+  }
+</script>
+<script>
+  function showTable() {
+    var exportButton = document.getElementById("dataTable");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showExportButton() {
+    var exportButton = document.getElementById("exportButton");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showTabelaExpirados() {
+    var exportButton = document.getElementById("tabelaExpirados");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showExpirados() {
+    var exportButton = document.getElementById("expirados");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showMesclar() {
+    var exportButton = document.getElementById("mesclar");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showMarcar() {
+    var exportButton = document.getElementById("marcar");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showIndisponivel() {
+    var exportButton = document.getElementById("indisponivel");
+    exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showExpirados() {
+    var exportButton = document.getElementById("expirados");
+    exportButton.style.display = "block";
+  }
+</script>
+
+
+<script>
 
   
-  <!-- /#main-content -->
-
-  </div>
-  <!-- /#wrapper -->
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/javascript.js"></script>
-  
-      <!-- Bootstrap core JavaScript -->
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone.min.js"></script>
-  <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
-  <script src="https://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
-  <script>
+  hideExportButton();
+  hideExpirados();
+  hideIndisponivel();
+  hideMarcar();
+  hideMesclar();
+  hideOutput();
   document.addEventListener('DOMContentLoaded', function () {
-    // Adiciona um ouvinte de evento de clique ao link "Editar Planilha"
     document.querySelector('a[href="#edit"]').addEventListener('click', function (event) {
         event.preventDefault();
+        hideExportButton();
+        hideMesclar();
+        hideExportButton();
+        hideOutput();
 
         // Habilita a edição da tabela
         enableTableEditing();
+        showExportButton();
+     
+    });
+      document.querySelector('a[href="#menu"]').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Habilita a edição da tabela
+        hideExportButton();
+        hideMesclar();
+        hideExportButton();
+        hideOutput();
 
         // Exibe o botão "Salvar Edição"
-        showSaveButton();
     });
+    document.querySelector('a[href="#import"]').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        // Habilita a edição da tabela
+     //   hideExportButton();
+      showOutput();
+        showMesclar();
+        showExportButton();
+        hideMarcar();
+        
+
+        // Exibe o botão "Salvar Edição"
+    });
+
 
     // Adiciona um ouvinte de evento de clique ao link "Exibir Expirados"
     document.querySelector('a[href="#show"]').addEventListener('click', function (event) {
         event.preventDefault();
+        showOutput();
+showMarcar();
+
         checkExpiredDates();
-      
+      //  hideExportButton();
         visualizarexpirados();
+        showExportButton();
+
         // Mostra apenas o número SAP e a data de vencimento
     });
 
       function enableTableEditing() {
-          // Obtém a tabela pelo ID
           var table = document.getElementById('dataTable');
 
-          // Define a propriedade contentEditable das células da tabela para true
           var cells = table.getElementsByTagName('td');
           for (var i = 0; i < cells.length; i++) {
               cells[i].contentEditable = true;
           }
 
-          // Adiciona uma classe para estilização adicional se necessário
           table.classList.add('editable-table');
-
-          // Adiciona um aviso ou faz qualquer outra ação necessária
-          alert('A edição da tabela está habilitada!');
+         alert('A edição da tabela está habilitada!');
       }
-
-      function showSaveButton() {
-          // Cria um botão para salvar a edição
-          var saveButton = document.createElement('button');
-          saveButton.innerHTML = 'Salvar Edição';
-          saveButton.addEventListener('click', function () {
-              // Chama a função exportToCSV() ao clicar no botão
-              exportToCSV();
-          });
-
-          // Adiciona o botão no meio da tela
-          var centerDiv = document.createElement('div');
-          centerDiv.style.textAlign = 'center';
-          centerDiv.appendChild(saveButton);
-
-          // Adiciona o div ao body
-          document.body.appendChild(centerDiv);
-      }
-
-      function showOnlySapAndDueDate() {
-          // Oculta todas as colunas exceto "Número SAP" e "Data de Vencimento"
-          $('#dataTable th:not(:first-child, :nth-child(4))').hide();
-          $('#dataTable td:not(:first-child, :nth-child(4))').hide();
-
-          // Verifica a data nas colunas "proxima A, A+, B, C" e mostra apenas as linhas expiradas
-          var currentDate = moment(); // Obtém a data atual
-          $('#dataTable tr').each(function () {
-              var row = $(this);
-              var dueDate = moment(row.find('td:eq(3)').text(), 'DD/MM/YYYY'); // Ajuste conforme a posição real da coluna
-
-              // Comparação da data atual com a data de vencimento
-              if (dueDate.isBefore(currentDate)) {
-                  row.show(); // Mostra a linha se a data de vencimento for anterior à data atual
-              } else {
-                  row.hide(); // Oculta a linha se a data de vencimento for posterior à data atual
-              }
-          });
-      }
-
-      document.addEventListener('DOMContentLoaded', function () {
-    // Adiciona um ouvinte de evento de clique ao link "Visualizar Expirados"
-    document.querySelector('a[href="#ShowExpired"]').addEventListener('click', function (event) {
-        event.preventDefault();
-
-        // Visualiza os itens expirados
-        visualizarexpirados();
-    });
-
-    function visualizarexpirados() {
-        // Obtém os dados do elemento com o ID "expiredItemsTextArea"
-        var expiredItemsData = document.getElementById('expiredItemsTextArea').value;
-
-        // Converte os dados em uma tabela
-        var table = convertExpiredItemsToTable(expiredItemsData);
-
-        // Obtém o elemento com o ID "main-wrapper"
-        var mainWrapper = document.getElementById('main-wrapper');
-
-        // Remove qualquer tabela existente dentro do "main-wrapper"
-        var existingTable = mainWrapper.querySelector('table');
-        if (existingTable) {
-            existingTable.remove();
-        }
-
-        // Adiciona a nova tabela ao "main-wrapper"
-        mainWrapper.appendChild(table);
-    }
-
-    function convertExpiredItemsToTable(data) {
-        // Cria uma tabela
-        var table = document.createElement('table');
-        table.classList.add('table', 'table-striped', 'table-dark');
-
-        // Adiciona uma linha de cabeçalho
-        var headerRow = table.insertRow();
-        ['Vencimento', 'SAP', 'Linha', 'Data de Vencimento'].forEach(function (header) {
-            var cell = headerRow.insertCell();
-            cell.textContent = header;
-        });
-
-        // Processa os dados e cria as linhas da tabela
-        var lines = data.split('\n');
-        for (var i = 0; i < lines.length; i++) {
-            var columns = lines[i].split('\t'); // Assumindo que os dados estão separados por tabulação, ajuste conforme necessário
-
-            // Cria uma nova linha
-            var row = table.insertRow();
-
-            // Adiciona as colunas à linha
-            for (var j = 0; j < columns.length; j++) {
-                var cell = row.insertCell();
-                cell.textContent = columns[j];
-            }
-        }
-
-        return table;
-    }
-});
 
       function exportToCSV() {
-          // Implemente sua lógica de exportação para CSV aqui
           alert('Função exportToCSV() chamada. Implemente a lógica de exportação aqui.');
       }
 
-      // Seu outro script JavaScript existente aqui
-      // ...
 
   });
+
 </script>
 
-<!-- ... Seu HTML existente ... -->
+<script>
+  function gerarTabela() {
+    hideTable(); // Oculta a DataTable
+
+    var expiredItemsData = document.getElementById('expiredItemsTextArea').value;
+
+    var mainContent = document.getElementById('main-content');
+
+    var existingTable = mainContent.querySelector('.custom-table');
+    if (existingTable) {
+        existingTable.remove();
+    }
+
+    var table = document.createElement('table');
+    table.classList.add('table', 'table-striped', 'table-dark', 'custom-table');
+
+    var headerRow = table.insertRow();
+    ['Vencimento', 'SAP', 'Linha', 'Data de Vencimento'].forEach(function (header) {
+      var cell = headerRow.insertCell();
+      cell.textContent = header;
+    });
+
+    var lines = expiredItemsData.split('\n');
+    for (var i = 0; i < lines.length; i++) {
+      var columns = lines[i].split(',');
+
+      var row = table.insertRow();
+
+      for (var j = 0; j < columns.length; j++) {
+        var cell = row.insertCell();
+        cell.textContent = columns[j];
+      }
+    }
+
+    mainContent.appendChild(table);
+  }
+</script>
+
+
+</script>
+
 
 
 
