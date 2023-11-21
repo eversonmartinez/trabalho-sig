@@ -58,9 +58,9 @@
 			      </li>
 			      <li class="nav-item">
               <a class="nav-link" href="#show" id="show">Exibir Expirados</a>
-			      <!-- <li class="nav-item">
+			      <li class="nav-item">
 			        <a class="nav-link" href="#locale">Localizar ferramenta</a>
-			      </li> -->
+			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="#import">Importar dados</a>
 			      </li>
@@ -100,9 +100,44 @@
             </div>
         </div>
 
-        
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="localeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Busca de Ferramenta</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table>
+              <tr>
+                <td>
+                  <h4>SAP:</h4>
+                </td>
+                <td>
+                  <input type="text" id="inputSAP"><br>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h4>Localização: </h4>
+                </td>
+                <td>
+                  <input type="text" id="inputLocalizacao">
+                </td>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="buscaModal()">Buscar</button>
+          </div>
+        </div>
+      </div>
     </div>
+        
+  </div>
 
     
     <script src="js/jquery.min.js"></script>
@@ -157,6 +192,11 @@
   function showOutput() {
     var exportButton = document.getElementById("expiredItemsTextArea");
     exportButton.style.display = "block";
+  }
+</script>
+<script>
+  function showModal() {
+    $('#localeModal').modal(show);
   }
 </script>
 <script>
@@ -288,16 +328,8 @@
 
     document.querySelector('a[href="#locale"]').addEventListener('click', function (event) {
         event.preventDefault();
-
-        // Habilita a edição da tabela
-     //   hideExportButton();
-      showOutput();
-        showMesclar();
-        showExportButton();
-        hideMarcar();
-        
-
-        // Exibe o botão "Salvar Edição"
+        //Mostra o modal de busca
+        showModal()
     });
 
 

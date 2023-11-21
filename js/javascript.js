@@ -312,4 +312,32 @@ function markAsUnavailable() {
   console.log("Marcação como INDISPONIVEL concluída.");
 }
 
+function buscaModal(){
+  var modal = document.getElementById("localeModal");
+  var sap = document.getElementById("inputSAP").value;
+  var local = document.getElementById("inputLocalizacao").value;
+
+  if(sap){
+    console.log("entrou")
+    const tableBodyRows = document.querySelectorAll('#dataTable tbody tr');
+    const editedData = [];
+
+    tableBodyRows.forEach(row => {
+      const rowData = {};
+      row.querySelectorAll('td').forEach((cell, index) => {
+        const columnName = document.querySelector(`#dataTable thead th:nth-child(${index + 1})`).textContent;
+        rowData[columnName] = cell.textContent;
+      });
+      
+      if(rowData[0].contains(sap))
+      editedData.push(rowData);
+    });
+  }
+ 
+  
+
+  // modal.inputSap.value="";
+  console.log(sap);
+  console.log(editedData);
+}
 
