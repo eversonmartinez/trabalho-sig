@@ -102,7 +102,7 @@ function checkExpiredDates() {
               expiredItemsTextArea.value += `VENCE HOJE - SAP:	 ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-hoje');
             } else if (daysDifference <= 15 && proximaDate.format('YYYY') === thisYear) {
-              expiredItemsTextArea.value += `VENDE DENTRO DE 15 DIAS - SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
+              expiredItemsTextArea.value += `VENCE DENTRO DE 15 DIAS - SAP:  ${sapValue}, Linha: ${rowIndex + 2}, Data de Vencimento: ${proximaDate.format('DD/MM/YYYY')}\n`;
               expiredItemsTextArea.classList.add('vence-15-dias');
             }
           } catch (error) {
